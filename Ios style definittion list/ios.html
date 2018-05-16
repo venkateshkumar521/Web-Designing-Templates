@@ -1,0 +1,63 @@
+<div id="main" class="container-fluid">
+  <div class="page-header">
+    <h1>Definition List View<small> powered by MarionetteJS</small></h1>
+    <p>Create an html definition list given some data/models. The definition list styles came from <a href="https://codepen.io/somethingkindawierd/pen/tkrqi">this pen</a>.</p>
+    <p>The definition list you should see below was dynamically rendered using MarionetteJS/BackboneJS</p>
+  </div>
+  
+  <div class="row-fluid">
+    <div class="span12">
+      <div id="content"></div>
+    </div>
+  </div>
+</div>
+
+<script type="text/html" id="def-template">
+  <div class="ios-dl">
+    <% _.each(groups, function(group) { %>
+  
+    <span class="legend"><%= group.label %></span>
+    <div class="definition-group">
+      <% _.each(group.items, function(value, key) { %>
+  
+      <dl class="dl-horizontal">
+        <%
+          var label = key;
+          if(label.indexOf('_') !== -1) {
+            label = _.underscoreToNormal(label);
+          }
+          label = _.titleCase(_.camelCaseToNormal(label));
+        %>
+        <dt><%= label %></dt>
+        <% if(!_.isUndefined(group.templates) && !_.isUndefined(group.templates[key])) {
+          var template = group.templates[key]; 
+          value = template({value: value}); 
+        } %>
+        <dd><%= value %></dd>
+      </dl>
+  
+      <% }); %>
+    </div>
+  
+    <% }); %>
+  </div>
+</script>
+    
+<script>
+  
+  // Bootstrap our data into the dom
+  var data = {};
+    
+  data.models = {
+    definitionModel: {
+      city: 'San Fransico',
+      state: 'Insanity',
+      coordinates: '37.7865, -122.4557',
+      other: 'Should Not Print',
+      // use an underscore here to prove it will display "pretty"
+      favorite_hobbies: 'Photography, Reading',
+      // use camelCase here to prove it will display "pretty"
+      favoriteAnimal: 'Monkey (with a banana)'
+    }
+  };
+</script>

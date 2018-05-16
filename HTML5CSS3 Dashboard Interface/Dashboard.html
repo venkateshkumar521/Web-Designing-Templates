@@ -1,0 +1,474 @@
+<html lang="nl"> 
+  <head> 
+<meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
+<style>
+@import "compass/css3";
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,300);
+
+$gold: hsl(47, 98%, 55%);
+$blue: hsl(206, 20%, 16%);
+$white: hsl(0, 0%, 100%);
+$black: hsl(0, 2%, 9%);
+$grey: hsl(0, 0%, 50%);
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  background-color: $white;
+  
+  color: darken($white, 70%);
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+}
+header {
+  width: 100%;
+  background-color: $blue;
+  position: fixed;
+  text-align: right;
+  line-height: 50px;
+}
+header a {
+  display: inline-block;
+  width: 130px;
+  cursor: pointer;
+  
+  color: $white;
+  text-align: center;
+  text-decoration: none;
+}
+header a:last-child {
+  background-color: darken($blue, 4%);
+  margin: 0 30px 0 0; 
+}
+header a:hover {
+  background-color: darken($blue, 10%); 
+}
+aside {
+  width: 17%;
+  min-width: 150px;
+  max-width: 300px;
+  height: 100%;
+  background-color: $black;
+  position: fixed;
+  top: 50px;
+  float: left;
+  
+  padding: 25px 0 0 0;
+}
+aside a {
+  display: block;
+  line-height: 40px;
+  border-right: 4px solid transparent;
+  cursor: pointer;
+  transition: background-color .3s linear,
+              border-right-color .3s linear,
+              color .3s linear;
+  
+  color: $grey;
+  padding: 0 0 0 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+aside a:hover,
+aside a.current { 
+  background-color: lighten($black, 2%);
+  border-right-color: $gold;
+  
+  color: $white;
+}
+#main {
+  width: 100%;
+  float: left;
+  overflow-x: hidden;
+}
+.sub {
+  width: 100%;
+  background-color: lighten($grey, 42%);
+  overflow: hidden;
+  
+  padding: 28px 0 0 20px;
+}
+.sub a {
+  display: inline-block;
+  min-width: 110px;
+  background-color: darken($white, 5%);
+  cursor: pointer;
+  border-radius: 3px 3px 0 0;
+  transition: background-color .5s,
+              color .5s;
+  
+  color: lighten($grey, 30%);
+  padding: 2px 0 0 0;
+  line-height: 35px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.sub a:hover,
+.sub a.current {
+  color: $grey;
+  background-color: $white;
+}
+
+/* Table */
+table {
+  border-color: darken($white, 50%);
+  
+  line-height: 20px;
+}
+.sp-table {
+  width: 98%;
+  margin: 15px;
+}
+.sp-table th {
+  text-align: left;
+  font-weight: 600; 
+}
+.sp-table thead.stay {
+  position: fixed;
+  top: 0;
+  visibility: hidden;
+}
+.sp-table th,
+.sp-table td {
+  border-bottom: 1px solid hsl(0, 0%, 90%);
+  
+  padding: 8px 8px;
+}
+/* Striped */
+.sp-table-striped tbody tr:nth-of-type(odd) td {
+  background-color: darken($white, 2%);
+}
+
+/* Hover */
+.sp-table-hover tbody tr:hover td {
+  background-color: darken($white, 7%); 
+}
+.opacity {
+  opacity: 0;
+}'
+</style>
+<script>
+$(document).ready( function() {
+  $('.sub > a').click( function() {
+    $('.sub').find('.current').removeClass('current');
+    $(this).addClass('current');    
+  });
+  $('aside > a').click( function() {
+    $('aside').find('.current').removeClass('current');
+    $(this).addClass('current');    
+  });
+  $('.ntfy i').click( function() {
+    $(this).parent().toggleClass('gt').toggleClass('active');
+  });
+  
+  var x = $('aside').width();
+  var margin = '50px 0 0 '+ x +'px';
+  var width = $(window).width() - x;
+  $('#main').css({
+    margin: margin,
+    width: width
+  });
+  
+  $(window).resize(function() {
+    var x = $('aside').width();
+    var margin = '50px 0 0 '+ x +'px';
+    var width = $(window).width() - x;
+    $('#main').css({
+      margin: margin,
+      width: width
+    });
+  });  
+});
+</script>
+    
+  </head>
+  <body>
+    <header>
+      <a>Settings</a>
+      <a>Robin Brons</a>
+    </header>
+    <aside>
+      <a class="current">Home</a>
+      <a>Users</a>
+      <a>Schedule</a>
+      <a>Info</a>
+    </aside>
+    <div id="main">
+      <div class="sub">
+        <a class="current">Monday</a>
+        <a>Tuesday</a>
+        <a>Wednesday</a>
+        <a>Thursday</a>
+        <a>Friday</a>
+      </div>
+      <table class="sp-table sp-table-striped sp-table-hover">
+        <thead>
+          <tr>
+            <th>Table Heading</th>
+            <th>Table Heading</th>
+            <th>Table Heading</th>
+            <th>Table Heading</th>
+            <th>Table Heading</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+          <tr>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+            <td>Table Data</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<html>
+<head>
+<style>
+html, body { height: 100% }
+
+body {
+  margin: 0 auto;
+  background: grey;
+  text-align: center;
+  background-image: url("http://25.media.tumblr.com/211b5f4f19038a3940a16c7bcd7c84de/tumblr_mq7at6uz641st5lhmo1_1280.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+input[type="file"] {
+  display: none
+}
+
+button {
+  color: rgba(255, 255, 255, 0.85);
+  margin: 50px;
+  font-family: calibri light;
+  letter-spacing: 2px;
+  font-size: 25px;
+  background: #333;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 25px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #444;
+}
+
+button:active {
+  background: #111;
+}
+
+button:focus {
+  outline: none;
+}
+</style>
+
+<script>
+var file, 
+    render;
+
+document.getElementById("upload_button").addEventListener("click", function(){
+  document.getElementById("background_input").click();
+}, false);
+
+document.body.addEventListener("drop", function(ev){
+  file = ev.dataTransfer.files[0];
+  if(!file.type.match("image.*")) {
+    alert("This file isn't image or it's unsupported format");
+    return;
+  }
+  reader = new FileReader();
+  reader.addEventListener("load", (function(theFile) {
+    return function(e) {
+      document.body.style.backgroundImage = "url('" + e.target.result + "')";
+		};
+	})(file), false);
+  reader.readAsDataURL(file);
+}, false);
+
+document.getElementById("background_input").addEventListener("change", function(ev){
+  file = ev.target.files[0];
+  if(!file.type.match("image.*")) {
+    alert("This file isn't image or it's unsupported format");
+    return;
+  }
+  reader = new FileReader();
+  reader.addEventListener("load", (function(theFile) {
+    return function(e) {
+      document.body.style.backgroundImage = "url('" + e.target.result + "')";
+		};
+	})(file), false);
+  reader.readAsDataURL(file);
+}, false);
+</script>
+</head>
+<input id="background_input" type="file"/>
+<button id="upload_button">Upload background<br/>or use drag and drop</button>

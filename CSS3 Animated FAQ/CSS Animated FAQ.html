@@ -1,0 +1,114 @@
+<html>
+<head>
+<style>
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.5em
+}
+
+body{
+  background: #D7423C;
+  box-sizing: border-box;
+}
+section{
+  padding: 10% 20%;
+}
+.animate{
+  transition: all .3s;
+}
+
+input[name=question]{
+    display: none;
+}
+input[name=question] + label{
+    position: relative;
+    display: block;
+    padding: 20px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background: rgba(246, 246, 246, 1);
+    color: #5a9aa8;
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    border-radius: 3px;
+}
+
+.response{
+    position: relative;
+    background: #7B2623;
+    color: #7A2723;
+    padding: 10px 20px;
+    -webkit-transform: translate3d(0,-40px, 0) rotate(-.5deg);
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    opacity: 0;
+    border-radius: 3px;
+}
+
+input[name=question]:checked + label{
+    background: #F6F6F6;
+    color: #5a9aa8;
+}
+input[name=question]:checked + label + .response{
+    opacity: 1;
+    visibility: visible;
+    padding: 10px 20px;
+    -webkit-transform: translate3d(0, 0, 0) rotate(0deg);
+    -webkit-filter: blur(0px);
+    margin-bottom: 20px;
+    color: white;
+}
+
+.fixed-height{
+    height: 50px;
+    overflow: hidden;
+    opacity: 1 !important;
+}
+
+</style>
+<script>
+ $(function(){
+        
+        function setHeight(){
+            $(".response").each(function(index,element){
+                var target = $(element);
+                target.removeClass("fixed-height");
+                var height = target.innerHeight();
+                target.attr("data-height", height)
+                      .addClass("fixed-height");
+            });
+        };
+        
+        $("input[name=question]").on("change", function(){
+            $("p.response").removeAttr("style");
+            
+            var target = $(this).next().next();
+            target.height(target.attr("data-height"));
+        })
+        
+        setHeight();
+    });
+</script>
+
+</head>
+<section>
+<input class="animate" type="radio" name="question" id="q1"/>
+<label class="animate" for="q1">Q: What is Lorem Ipsum?</label>
+<p class="response animate">A: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<input class="animate" type="radio" name="question" id="q2"/>
+<label class="animate" for="q2">Q: Why do we use it?</label>
+<p class="response animate">A: It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+
+<input class="animate" type="radio" name="question" id="q3"/>
+<label class="animate" for="q3">Q: Where does it come for?</label>
+<p class="response animate">A: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+
+<input class="animate" type="radio" name="question" id="q4"/>
+<label class="animate" for="q4">Q: Where can i get some?</label>
+<p class="response animate">A: There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc..</p>
+</section>
